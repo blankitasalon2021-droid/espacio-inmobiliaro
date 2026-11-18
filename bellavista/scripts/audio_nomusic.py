@@ -55,8 +55,8 @@ for k, c in enumerate(cuts):
     whoosh(tl[c][0] + (0.2 if c in ('c', 'r', 'u') else 0.0), gain=0.20 if c in ('c', 'f', 'j', 'm', 'r', 'u') else 0.12,
            pan_dir=1 if k % 2 == 0 else -1)
 whoosh(tl['v'][0] + 0.45, dur=1.2, gain=0.22)
-soft_hit(tl['v'][0] + 1.3)          # price reveal
-soft_hit(tl['v'][0] + 5.45, 0.26)   # brand / logo reveal
+soft_hit(tl['v'][0] + 0.85)          # price reveal
+soft_hit(tl['v'][0] + 3.95, 0.26)   # brand / logo reveal
 # gentle intro swell under the title
 whoosh(1.1, dur=1.8, gain=0.12, f_lo=250, f_hi=3000)
 savewav('aud/fx2.wav', fx)

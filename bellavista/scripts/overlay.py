@@ -153,8 +153,8 @@ for clip, chunks in SUBS.items():
 
 # ---------------- Closing (over blurred façade, segment v) ----------------
 v0, v1 = tl['v']
-A0 = v0 + 0.7; A1 = v0 + 5.3          # price phase
-B0 = A1 + 0.15; B1 = TOTAL           # brand phase
+A0 = v0 + 0.5; A1 = v0 + 3.85          # price phase
+B0 = A1 + 0.1; B1 = TOTAL             # brand phase
 def blk(fn):
     L = canvas(); d = ImageDraw.Draw(L); fn(d); return shadowed(L, 10, 200, 3)
 layers.append(Layer(blk(lambda d: (dtext(d, W/2, 520, 'CASA EN VENTA', mont(34, 700), WHITE, tr=10),
@@ -163,13 +163,13 @@ layers.append(Layer(blk(lambda d: (dtext(d, W/2, 520, 'CASA EN VENTA', mont(34, 
 def _price(d):
     dtext(d, W/2, 700, 'US$550,000', corm(160, 650), WHITE, tr=2)
     dtext(d, W/2, 895, 'MÁS IMPUESTOS', mont(32, 700), BEIGE, tr=10)
-layers.append(Layer(blk(_price), A0 + 0.6, A1, fin=0.7, fout=0.4, rise=14))
+layers.append(Layer(blk(_price), A0 + 0.35, A1, fin=0.6, fout=0.35, rise=14))
 def _specs(d):
     y = 1010
     d.line((W/2 - 60, y, W/2 + 60, y), fill=BEIGE, width=3); y += 40
     for t in ['315 m² DE CONSTRUCCIÓN', '180 m² DE TERRENO', '3 HABITACIONES  |  3.5 BAÑOS', 'PARQUEO PARA 2 VEHÍCULOS']:
         dtext(d, W/2, y, t, mont(36, 600), WHITE, tr=4); y += 64
-layers.append(Layer(blk(_specs), A0 + 1.4, A1, fin=0.7, fout=0.4, rise=14))
+layers.append(Layer(blk(_specs), A0 + 0.8, A1, fin=0.6, fout=0.35, rise=14))
 
 layers.append(Layer(blk(lambda d: dtext(d, W/2, 330, '¿TE IMAGINAS VIVIENDO AQUÍ?', corm(58, 650), WHITE, tr=2)),
                     B0, B1, fin=0.6, fout=0.01, rise=14))
@@ -191,10 +191,8 @@ def _contact(d):
     y += 230
     dtext(d, W/2, y, 'AGENDA TU VISITA', mont(38, 800), WHITE, tr=8)
     y += 76
-    dtext(d, W/2, y, 'DANI ÁLVAREZ', corm(64, 700), WHITE, tr=6)
-    dtext(d, W/2, y + 76, 'ESPACIO INMOBILIARIO', mont(28, 700), WHITE, tr=10)
     # social row
-    y += 160; handle = '@espacio.inmobiliariogt'; fh = mont(32, 600)
+    y += 20; handle = '@espacio.inmobiliariogt'; fh = mont(32, 600)
     total = 3 * 40 + 2 * 12 + 20 + tw(handle, fh); x = W/2 - total/2
     for kind in 'fit':
         cx, cy = x + 20, y + 22
@@ -210,7 +208,7 @@ def _contact(d):
             d.text((cx - (bb[0]+bb[2])/2, cy - (bb[1]+bb[3])/2), '♪', font=sf, fill=WHITE)
         x += 52
     d.text((x + 8, y + 2), handle, font=fh, fill=WHITE)
-layers.append(Layer(blk(_contact), B0 + 0.8, B1, fin=0.8, fout=0.01, rise=12))
+layers.append(Layer(blk(_contact), B0 + 0.6, B1, fin=0.7, fout=0.01, rise=12))
 
 def frame(t):
     out = np.zeros((H, W, 4), np.float32)

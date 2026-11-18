@@ -1,41 +1,40 @@
 # Edit decision list — Bellavista (Espacio Inmobiliario)
 # Each segment: id, src, ss (source in), dur (timeline dur), speed (<1 = slow), xf (dissolve INTO this seg)
 FPS = 30
+VDUR = 7.4
 SEGS = [
  # ESCENA 1 — BELLAVISTA
- dict(id='a', src='Mi_peli_cula', ss=0.45, dur=2.2, speed=0.68, scene=1),
- dict(id='b', src='Mi_peli_cula', ss=1.95, dur=10.45, scene=1),
+ dict(id='a', src='Mi_peli_cula', ss=1.41, dur=0.8, speed=0.68, scene=1),
+ dict(id='b', src='Mi_peli_cula', ss=1.95, dur=10.5, scene=1),
  # ESCENA 2 — SALA PRINCIPAL
- dict(id='c', src='Mi_peli_cula_1', ss=0.30, dur=5.25, xf=0.45, scene=2),
- dict(id='d', src='IMG_1474', ss=0.30, dur=3.6, speed=0.75, scene=2),
- dict(id='e', src='IMG_1458', ss=0.20, dur=2.8, scene=2),
+ dict(id='c', src='Mi_peli_cula_1', ss=0.80, dur=4.65, xf=0.45, scene=2),
+ dict(id='d', src='IMG_1474', ss=0.30, dur=2.0, speed=0.75, scene=2),
+ dict(id='e', src='IMG_1458', ss=0.20, dur=1.8, scene=2),
  # ESCENA 3 — COMEDOR, COCINA, PATIO
  dict(id='f', src='Mi_peli_cula_2', ss=0.45, dur=3.0, scene=3),
  dict(id='g', src='IMG_1476', ss=4.0, dur=2.7, scene=3),
- dict(id='h', src='IMG_1477', ss=0.0, dur=3.0, scene=3),
- dict(id='i', src='IMG_1478', ss=1.2, dur=2.4, xf=0.35, scene=3),
+ dict(id='h', src='IMG_1477', ss=0.0, dur=1.5, scene=3),
  # ESCENA 4 — SEGUNDO NIVEL
- dict(id='j', src='IMG_1480', ss=5.0, dur=2.2, scene=4),
- dict(id='k', src='Mi_peli_cula_3', ss=None, dur=2.8, sync='j', scene=4),
- dict(id='l', src='IMG_1460', ss=1.7, dur=2.8, scene=4),
+ dict(id='j', src='IMG_1480', ss=5.0, dur=2.0, scene=4),
+ dict(id='k', src='Mi_peli_cula_3', ss=None, dur=2.9, sync='j', scene=4),
+ dict(id='l', src='IMG_1460', ss=1.7, dur=2.0, scene=4),
  # ESCENA 5 — HABITACIÓN PRINCIPAL
  dict(id='m', src='Mi_peli_cula_4', ss=2.4, dur=2.9, scene=5),
  dict(id='n', src='IMG_1465', ss=0.3, dur=1.35, scene=5),
  dict(id='o', src='IMG_1466', ss=0.4, dur=1.2, scene=5),
- dict(id='p', src='IMG_1468', ss=2.4, dur=3.2, scene=5),
- dict(id='q', src='IMG_1463', ss=0.5, dur=2.2, speed=0.8, scene=5),
+ dict(id='p', src='IMG_1468', ss=2.4, dur=2.0, scene=5),
  # ESCENA 6 — PATIO ALTO, TERRAZA Y CIERRE
- dict(id='r', src='IMG_1470', ss=0.8, dur=3.4, xf=0.35, scene=6),
- dict(id='s', src='IMG_1471', ss=0.0, dur=2.8, scene=6),
+ dict(id='r', src='IMG_1470', ss=0.8, dur=2.1, xf=0.35, scene=6),
+ dict(id='s', src='IMG_1471', ss=0.0, dur=2.0, scene=6),
  dict(id='t', src='Mi_peli_cula_5', ss=0.55, dur=7.2, scene=6),
- dict(id='u', src='Mi_peli_cula', ss=12.30, dur=2.8, speed=0.5, xf=0.5, scene=7),
- dict(id='v', src='Mi_peli_cula', ss=13.62, dur=10.4, xf=0.9, scene=7, closing=True, freeze=True),
+ dict(id='u', src='Mi_peli_cula', ss=12.30, dur=2.2, speed=0.5, xf=0.5, scene=7),
+ dict(id='v', src='Mi_peli_cula', ss=13.62, dur=VDUR, xf=0.9, scene=7, closing=True, freeze=True),
 ]
 
 # Voice placements: clip, src_from, src_to, anchor segment id, timeline offset relative to anchor start
 VOICE = [
  ('Mi_peli_cula',   1.85, 12.00, 'b', -0.10),
- ('Mi_peli_cula_1', 1.10,  5.45, 'c',  0.80),
+ ('Mi_peli_cula_1', 1.10,  5.45, 'c',  0.30),
  ('Mi_peli_cula_2', 0.62,  6.25, 'f',  0.17),
  ('Mi_peli_cula_3', 0.70,  5.30, 'j',  0.30),
  ('Mi_peli_cula_4', 2.65,  8.75, 'm',  0.25),
