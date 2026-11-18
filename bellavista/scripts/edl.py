@@ -29,8 +29,7 @@ SEGS = [
  dict(id='s', src='IMG_1471', ss=0.0, dur=2.8, scene=6),
  dict(id='t', src='Mi_peli_cula_5', ss=0.55, dur=7.2, scene=6),
  dict(id='u', src='Mi_peli_cula', ss=12.30, dur=2.8, speed=0.5, xf=0.5, scene=7),
- dict(id='v', src='IMG_1459', ss=0.4, dur=6.6, speed=0.5, xf=0.6, scene=7, closing=True),
- dict(id='w', src='CARD', ss=0, dur=4.2, xf=0.6, scene=7),
+ dict(id='v', src='Mi_peli_cula', ss=13.62, dur=10.4, xf=0.9, scene=7, closing=True, freeze=True),
 ]
 
 # Voice placements: clip, src_from, src_to, anchor segment id, timeline offset relative to anchor start

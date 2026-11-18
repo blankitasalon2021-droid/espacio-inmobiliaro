@@ -54,7 +54,7 @@ def swell(t_center, dur=1.1, gain=0.06, f0=600, f1=4500):
     env = np.sin(np.pi * np.clip(tt / dur, 0, 1)) ** 2.5
     y = y / np.max(np.abs(y)) * env * gain
     i = int((t_center - dur * 0.6) * SR); j = min(N, i + n); fx[:, i:j] += y[:, :j - i]
-for key in ['c', 'r', 'u', 'w']:
+for key in ['c', 'r', 'u', 'v']:
     swell(tl[key][0] + 0.2)
 savewav('aud/fx.wav', fx)
 
