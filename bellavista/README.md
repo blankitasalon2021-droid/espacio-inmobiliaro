@@ -7,7 +7,8 @@ Proyecto de edición por código (ffmpeg + Python).
 3. `scripts/render_segments.py` — HDR→SDR, encuadre 9:16, corrección de color, nitidez y cámara lenta interpolada.
 4. `scripts/overlay.py` — capa animada: títulos, datos, subtítulos palabra por palabra, precio y cierre de marca (Cormorant Garamond + Montserrat, colores #E7D3AF / #661E1A).
 5. `scripts/music.py` — música original compuesta y sintetizada por código (piano + cuerdas), libre de derechos de terceros.
-6. `scripts/audio.py` — limpieza de voz, EQ, compresión, ducking de música, mezcla a -14 LUFS / -1 dBTP.
+6. `scripts/audio_nomusic.py` — versión sin música: voz + efectos de sonido.
+6b. `scripts/audio.py` — limpieza de voz, EQ, compresión, ducking de música, mezcla a -14 LUFS / -1 dBTP.
 7. `scripts/assemble.py` — montaje final 1080x1920, 30 fps, H.264 + AAC.
 
 Los videos originales no se incluyen en el repositorio.

@@ -27,16 +27,17 @@ def grade(src):
         rg = k ** -0.35; bg = k ** 0.65; gg = k ** 0.05
     # Exposure: bring median luma toward 150 (partial)
     # Exposure: bright, airy look. ffmpeg eq gamma > 1 brightens (out = in^(1/gamma)).
-    tgt = 168.0 if is_dani else 165.0
+    tgt = 162.0 if is_dani else 160.0
     g = math.log(med / 255) / math.log(tgt / 255)
     g = 1 + (g - 1) * 0.85
     g = min(max(g, 0.85), 1.75 if is_dani else 1.3)
-    sat = 1.08 if is_dani else 0.97
-    if exterior: sat = 1.05
-    curve = ("0/0.02 0.15/0.17 0.5/0.55 0.85/0.88 1/0.985" if is_dani else
-             "0/0.015 0.15/0.155 0.5/0.52 0.85/0.87 1/0.985")
+    sat = 1.22 if is_dani else 1.12
+    if exterior: sat = 1.18
+    if br < 0.45 and not is_dani: sat = 1.0
+    curve = ("0/0 0.15/0.14 0.5/0.53 0.85/0.88 1/0.99" if is_dani else
+             "0/0 0.15/0.135 0.5/0.51 0.85/0.87 1/0.99")
     f = (f"colorchannelmixer=rr={rg:.3f}:gg={gg:.3f}:bb={bg:.3f},"
-         f"eq=gamma={g:.3f}:saturation={sat}:contrast=1.02,"
+         f"eq=gamma={g:.3f}:saturation={sat}:contrast=1.07,"
          f"curves=master='{curve}',"
          )
     return crop, f, dict(br=round(br, 2), med=round(med), gamma=round(g, 3), rg=round(rg, 3), bg=round(bg, 3))
