@@ -16,10 +16,10 @@ for k, s in enumerate(SEGS[1:], start=1):
     xf = s.get('xf', 0)
     if xf:
         off = curlen - xf
-        fc.append(f"{cur}[s{k}]xfade=transition=fade:duration={xf}:offset={off:.4f}[j{k}]")
+        fc.append(f"{cur}[s{k}]xfade=transition=fade:duration={xf}:offset={off:.4f},settb=1/{FPS}[j{k}]")
         curlen = off + s['dur']
     else:
-        fc.append(f"{cur}[s{k}]concat=n=2:v=1:a=0[j{k}]")
+        fc.append(f"{cur}[s{k}]concat=n=2:v=1:a=0,settb=1/{FPS}[j{k}]")
         curlen += s['dur']
     cur = f'[j{k}]'
 # --- overlays
@@ -39,7 +39,7 @@ fc.append(f"{cur}fade=t=out:st={TOTAL - 0.35:.3f}:d=0.35,format=yuv420p[vout]")
 inputs += ['-i', 'aud/master.wav']
 cmd = ['ffmpeg', '-v', 'error', '-stats', '-y'] + inputs + [
     '-filter_complex', ';'.join(fc), '-map', '[vout]', '-map', f'{base + len(cues)}:a',
-    '-c:v', 'libx264', '-profile:v', 'high', '-level', '4.2', '-preset', 'slow', '-crf', '16', '-maxrate', '20M', '-bufsize', '30M',
+    '-c:v', 'libx264', '-profile:v', 'high', '-level', '4.2', '-preset', 'slow', '-crf', '17', '-maxrate', '14M', '-bufsize', '24M',
     '-pix_fmt', 'yuv420p', '-r', str(FPS), '-g', '60', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
     '-c:a', 'aac', '-b:a', '320k', '-ar', '48000', '-movflags', '+faststart', '-t', f'{TOTAL:.3f}', OUT]
 open('assemble_cmd.txt', 'w').write(' '.join(cmd))

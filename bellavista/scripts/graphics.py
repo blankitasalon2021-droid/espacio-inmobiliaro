@@ -58,7 +58,7 @@ y = 300
 draw_text(d, W / 2, y, 'BELLAVISTA', corm(118, 600), WHITE, track=14)
 d.line((W / 2 - 70, y + 165, W / 2 + 70, y + 165), fill=BEIGE, width=3)
 draw_text(d, W / 2, y + 188, 'Un estilo de vida extraordinario', cormi(52, 500), BEIGE)
-img = with_shadow(L, 14, 190, scrim=(140, y - 40, 940, y + 280, 120))
+img = with_shadow(L, 14, 210, scrim=(120, y - 50, 960, y + 290, 175))
 cue(save(img, 'title'), 0.45, tl['b'][0] + 2.6 - 0.45, fin=0.9, fout=0.6, rise=30)
 
 # ---------- Feature blocks ----------
@@ -69,7 +69,7 @@ def feature_numbers(rows, name):
     for big, small in rows:
         draw_text(d, W / 2, y, big, corm(96, 600), WHITE); y += 108
         draw_text(d, W / 2, y, small, mont(28, 600), BEIGE, track=6); y += 62
-    img = with_shadow(L, 12, 200, scrim=(200, 250, 880, y + 30, 120))
+    img = with_shadow(L, 12, 200, scrim=(200, 250, 880, y + 30, 165))
     return save(img, name)
 
 def feature_lines(lines, name):
@@ -78,7 +78,7 @@ def feature_lines(lines, name):
     d.line((W / 2 - 50, y, W / 2 + 50, y), fill=BEIGE, width=3); y += 34
     for i, t in enumerate(lines):
         draw_text(d, W / 2, y, t, cormi(66, 600), WHITE); y += 84
-    img = with_shadow(L, 12, 200, scrim=(150, 260, 930, y + 30, 120))
+    img = with_shadow(L, 12, 200, scrim=(150, 260, 930, y + 30, 165))
     return save(img, name)
 
 f1 = feature_numbers([('315 m²', 'DE CONSTRUCCIÓN'), ('180 m²', 'DE TERRENO')], 'feat1')
@@ -108,6 +108,12 @@ def _p3(d):
         draw_text(d, W/2, y, t, mont(34, 500), WHITE, track=4); y += 62
 p3 = save(layer(_p3), 'price3')
 end_v = v1 - 0.6
+import numpy as np
+yy, xx = np.mgrid[0:H, 0:W]
+a = 0.62 + 0.25 * np.exp(-(((yy - 860) / 520.0) ** 2))
+sc = np.zeros((H, W, 4), np.uint8); sc[..., 0], sc[..., 1], sc[..., 2] = 70, 18, 15
+sc[..., 3] = (np.clip(a, 0, 0.9) * 255).astype(np.uint8)
+cue(save(Image.fromarray(sc, 'RGBA'), 'price_scrim'), v0 + 0.1, v1 - v0 - 0.1, fin=0.9, fout=0.01, rise=0)
 cue(p1, v0 + 0.5, end_v - (v0 + 0.5), fin=0.7, fout=0.5)
 cue(p2, v0 + 1.3, end_v - (v0 + 1.3), fin=0.8, fout=0.5, rise=16)
 cue(p3, v0 + 2.3, end_v - (v0 + 2.3), fin=0.8, fout=0.5, rise=16)
@@ -147,7 +153,7 @@ for clip, chunks in SUBS.items():
         L = Image.new('RGBA', (W, H)); d = ImageDraw.Draw(L)
         tw = sf.getlength(txt); y = 1395
         bg = Image.new('RGBA', (W, H)); bd = ImageDraw.Draw(bg)
-        bd.rounded_rectangle((W/2 - tw/2 - 30, y - 16, W/2 + tw/2 + 30, y + 66), radius=20, fill=(18, 8, 6, 105))
+        bd.rounded_rectangle((W/2 - tw/2 - 30, y - 16, W/2 + tw/2 + 30, y + 66), radius=20, fill=(18, 8, 6, 165))
         d.text((W/2 - tw/2, y), txt, font=sf, fill=WHITE)
         img = Image.alpha_composite(bg, with_shadow(L, 6, 150))
         p = save(img, f'sub{n:02d}'); n += 1
