@@ -216,7 +216,7 @@ A0 = v0 + 0.55; A1 = v0 + 3.75
 def blk(fn):
     L = canvas(); d = ImageDraw.Draw(L); fn(d); return shadowed(L, 11, 200, 3)
 add(blk(lambda d: dtext(d, W / 2, 470, 'CASA EN VENTA', mont(32, 700), WHITE, tr=12)), A0, A1, fin=0.4, fout=0.3, rise=14, sfx='whoosh_s')
-add(blk(lambda d: d.text((W / 2 - tw('Residencial', script(96)) / 2, 520), 'Residencial', font=script(96), fill=BEIGE)),
+add(blk(lambda d: d.text((W / 2 - tw('Residencial', script(96)) / 2, 520), 'Residencial', font=script(96), fill=WHITE)),
     A0 + 0.2, A1, fin=0.4, fout=0.3, rise=0, wipe=0.5)
 add(blk(lambda d: dtext(d, W / 2, 625, 'BELLAVISTA', cin(96, 900), WHITE, tr=4)), A0 + 0.35, A1, fin=0.4, fout=0.3, rise=14)
 price = 'US$550,000'; fp = cin(132, 900); xp = W / 2 - tw(price, fp, 2) / 2

@@ -4,7 +4,6 @@
 - **Recorrido (idea 1):** cada frase de Dani apoyada con tomas de detalle; barridos con desenfoque entre escenas.
 - **Datos (idea 2):** subtítulos palabra por palabra en Cinzel; las palabras clave aparecen en blanco y cambian a beige sobre fondo vino.
 - **Ritmo y gráficos (idea 1):** checklist con palomitas sobre el patio y precio grande al final.
-- **Efecto especial (idea 3):** la terraza pasa de día a atardecer.
 - **Cierre (idea 1):** el farol del imagotipo se dibuja solo, luego entra el texto, los botones de WhatsApp, el CTA y las redes.
 - **Sonido:** sin música; voz + un efecto por elemento en movimiento; sin efectos en la parte emocional; -14 LUFS.
 

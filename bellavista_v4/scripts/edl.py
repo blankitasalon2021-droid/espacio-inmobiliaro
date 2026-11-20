@@ -25,11 +25,11 @@ SEGS = [
  dict(id='n', src='IMG_1465', ss=0.3, dur=1.3),
  dict(id='o', src='IMG_1466', ss=0.4, dur=1.2),
  dict(id='p', src='IMG_1468', ss=2.4, dur=2.0),
- # TERRAZA: día → atardecer
+ # TERRAZA
  dict(id='r', src='IMG_1470', ss=0.8, dur=2.0, tr='whipL', xf=0.3),
- dict(id='t', src='Mi_peli_cula_5', ss=0.55, dur=7.25, dusk=(1.2, 6.2)),
- # PRECIO + TARJETA FINAL (última toma desenfocada, ya en atardecer)
- dict(id='v', src='Mi_peli_cula_5', ss=7.78, dur=VDUR, tr='fade', xf=0.7, freeze=True, closing=True, dusk=(0, 0)),
+ dict(id='t', src='Mi_peli_cula_5', ss=0.55, dur=7.25),
+ # PRECIO + TARJETA FINAL (última toma desenfocada)
+ dict(id='v', src='Mi_peli_cula_5', ss=7.78, dur=VDUR, tr='fade', xf=0.7, freeze=True, closing=True),
 ]
 
 VOICE = [
