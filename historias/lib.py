@@ -403,6 +403,25 @@ class Mix:
         if j > i: bus[:, i:j] += sig[:, :j - i] * gain
 
 # ---- música
+def follow_music(mx, events, below_db=7.0, win=2.0, music_gain=0.7):
+    """Ajusta cada efecto al nivel de la música en ese momento (queda `below_db` por debajo)."""
+    m = mx.mus / (np.max(np.abs(mx.mus)) + 1e-9) * music_gain
+    out = []
+    for name, t in events:
+        a, b = int(max(0, t - win / 2) * SR), int((t + win / 2) * SR)
+        lm = 20 * np.log10(np.sqrt(np.mean(m[:, a:b] ** 2)) + 1e-9)
+        sig = FX[name](); lf = 20 * np.log10(np.sqrt(np.mean(sig[:int(0.3 * SR)] ** 2)) + 1e-9)
+        g = 10 ** ((lm - below_db - lf) / 20)
+        out.append((name, t, float(np.clip(g, 0.1, 1.0))))
+    return out
+
+def music_file(mx, path, start=0.0):
+    """Usa una pista de música externa (wav 48 kHz estéreo) desde `start` segundos."""
+    with wave.open(path) as w:
+        x = np.frombuffer(w.readframes(w.getnframes()), '<i2').astype(np.float64).reshape(-1, w.getnchannels()).T / 32768
+    x = x[:, int(start * SR):]
+    n = min(mx.N, x.shape[1]); mx.mus[:, :n] += x[:, :n]
+
 CALM = [(38, [62, 66, 69, 74]), (33, [61, 64, 69, 73]), (35, [59, 62, 66, 71]), (31, [59, 62, 67, 71])]  # D A Bm G
 
 def music_calm(mx, bpm=72, end_hold=True):
@@ -526,9 +545,10 @@ def save(path, x):
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x, -1, 1).T * 32767).astype('<i2').tobytes())
 
-def master(mx, events, out, music_gain=0.5, fade_out=1.5, reverb_music=True):
-    for name, t in events:
-        mx.put(mx.fx, FX[name](), t - LEAD.get(name, 0), pan=_rng.uniform(-0.25, 0.25))
+def master(mx, events, out, music_gain=0.5, fade_out=1.5, reverb_music=True, fx_gain=1.0):
+    for e in events:
+        name, t = e[:2]; g = e[2] if len(e) > 2 else 1.0
+        mx.put(mx.fx, FX[name](), t - LEAD.get(name, 0), pan=_rng.uniform(-0.25, 0.25), gain=fx_gain * g)
     m = mx.mus
     if reverb_music: m = np.stack([reverb(m[0], 2.6, 0.3), reverb(m[1], 2.8, 0.3)])
     m = m / (np.max(np.abs(m)) + 1e-9) * music_gain

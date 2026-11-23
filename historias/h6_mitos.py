@@ -12,6 +12,7 @@ SEGS = [
     seg(110.6, 114.7, 0.5, blur=True, xf=('fade', 0.8)),
 ]
 ST, TOTAL = timeline(SEGS)
+MUSICA = os.environ.get('MUSICA')  # wav externo opcional
 L = []; EV = []
 for k in range(1, 6): EV.append(('whoosh', ST[k] + 0.2))
 
@@ -88,8 +89,19 @@ if __name__ == '__main__':
             Image.fromarray(render_frame(L, tt), 'RGBA').save(f'work/h6_ov_{tt}.png')
     else:
         print('total', TOTAL, 'starts', ST)
-        render_segments(SEGS, 'work/h6')
-        mx = Mix(TOTAL); music_pop(mx, bpm=100)
-        master(mx, EV, 'work/h6_audio.wav', music_gain=0.42, reverb_music=False)
-        assemble(SEGS, 'work/h6', L, 'work/h6_audio.wav', 'out/historia6_mitos.mp4')
+        mx = Mix(TOTAL)
+        if MUSICA:   # pista elegida por Blanca (piano), recortada para que su final caiga en la tarjeta final
+            music_file(mx, MUSICA, start=0.8)
+            master(mx, follow_music(mx, EV), 'work/h6_audio.wav', music_gain=0.7, reverb_music=False, fade_out=0.4)
+            out = 'out/historia6_mitos_piano.mp4'
+        else:
+            music_pop(mx, bpm=100)
+            master(mx, EV, 'work/h6_audio.wav', music_gain=0.42, reverb_music=False)
+            out = 'out/historia6_mitos.mp4'
+        if '--audio' in sys.argv: sys.exit()
+        if os.path.isdir('work/h6') and '--reuse' in sys.argv:
+            pass
+        else:
+            render_segments(SEGS, 'work/h6')
+        assemble(SEGS, 'work/h6', L, 'work/h6_audio.wav', out)
         print('ok')
