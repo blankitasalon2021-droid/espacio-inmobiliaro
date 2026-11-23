@@ -2,3 +2,4 @@
 *.mov
 historias/work/
 historias/out/
+__pycache__/
